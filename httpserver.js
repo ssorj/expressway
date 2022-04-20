@@ -57,7 +57,6 @@ amqp.on("message", (event) => {
 // HTTP
 
 const http = express()
-
 http.use(express.json())
 
 let sequence = 0
