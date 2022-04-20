@@ -28,17 +28,19 @@ const server = rhea.create_container()
 server.on("message", (event) => {
     const request = event.message;
 
-    console.log(`Received request "${request.body}" (${request.message_id})`);
+    console.log(`Received request ${JSON.stringify(request.body)} (${request.message_id})`);
 
     const response = {
         to: request.reply_to,
         correlation_id: request.message_id,
-        body: request.body.toUpperCase(),
+        body: {
+            text: request.body.text.toUpperCase(),
+        }
     };
 
     event.connection.send(response);
 
-    console.log(`Sent response "${response.body}" (${response.correlation_id})`);
+    console.log(`Sent response ${JSON.stringify(response.body)} (${response.correlation_id})`);
 })
 
 server.listen({port: amqp_port})

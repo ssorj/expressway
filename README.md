@@ -15,7 +15,7 @@ An example program that combines async HTTP and AMQP operations
 
     node httpserver.py
 
-## Calling the HTTP endpoint
+## Calling the HTTP API
 
     curl -X POST http://localhost:3000/api/submit -H 'Content-Type: application/json' -d '{"text": "abc"}'
 
@@ -25,18 +25,20 @@ AMQP server
 
     $ node amqpserver.js
     Listening on port 3001
-    Received request "abc" (0)
-    Sent response "ABC" (0)
+    Received request {"text":"abc"} (0)
+    Sent response {"text":"ABC"} (0)
 
 HTTP server
 
     $ node httpserver.js
     Listening on port 3000
     Connected to AMQP server on port 3001
-    Sent request "abc" (0)
-    Received response "ABC" (0)
+    Received HTTP request {"text":"abc"}
+    Sent AMQP request {"text":"abc"} (0)
+    Received AMQP response {"text":"ABC"} (0)
+    Sent HTTP response {"text":"ABC"}
 
 Client
 
     $ curl -X POST http://localhost:3000/api/submit -H 'Content-Type: application/json' -d '{"text": "abc"}'
-    ABC
+    {"text":"ABC"}

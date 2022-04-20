@@ -61,26 +61,33 @@ http.use(express.json())
 
 let sequence = 0
 
-http.post("/api/submit", async (req, res) => {
+http.post("/api/submit", async (http_request, http_response) => {
+    console.log(`Received HTTP request ${JSON.stringify(http_request.body)}`)
+
     if (!receiver) {
         await once(amqp, "x_receiver_ready")
     }
 
-    const request = {
+    const amqp_request = {
         message_id: sequence++,
         reply_to: receiver.source.address,
-        body: req.body.text,
+        body: {
+            text: http_request.body.text,
+        },
     }
 
-    sender.send(request)
+    sender.send(amqp_request)
 
-    console.log(`Sent request "${request.body}" (${request.message_id})`)
+    console.log(`Sent AMQP request ${JSON.stringify(amqp_request.body)} (${amqp_request.message_id})`)
 
-    const [response] = await once(amqp, "x_response")
+    const [amqp_response] = await once(amqp, "x_response")
+    const response_data = amqp_response.body
 
-    console.log(`Received response "${response.body}" (${response.correlation_id})`)
+    console.log(`Received AMQP response ${JSON.stringify(response_data)} (${amqp_response.correlation_id})`)
 
-    res.send(response.body)
+    http_response.send(response_data)
+
+    console.log(`Sent HTTP response ${JSON.stringify(response_data)}`)
 })
 
 // Let's go
