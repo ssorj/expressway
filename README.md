@@ -1,8 +1,11 @@
 # Expressway
 
 An example program that combines async HTTP and AMQP operations.  It
-shows how to use JavaScript async/await with Express and Rhea in order
-to process HTTP requests concurrently.
+shows how to use JavaScript async/await with [Express][express] and
+[Rhea][rhea] in order to process HTTP requests concurrently.
+
+[express]: https://expressjs.com/
+[rhea]: https://github.com/amqp/rhea
 
 <img src="images/sequence.svg" width="640"/>
 
