@@ -25,7 +25,7 @@ const amqp_port = 3001
 
 const server = rhea.create_container()
 
-server.on("message", function (event) {
+server.on("message", (event) => {
     const request = event.message;
 
     console.log(`Received request "${request.body}"`);
