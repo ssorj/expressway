@@ -75,11 +75,11 @@ http.post("/api/submit", async (req, res) => {
 
     sender.send(request)
 
-    console.log(`Sent request "${request.body}" (ID ${request.message_id})`)
+    console.log(`Sent request "${request.body}" (${request.message_id})`)
 
     const [response] = await once(amqp, "x_response")
 
-    console.log(`Received response "${response.body}" (ID ${response.correlation_id})`)
+    console.log(`Received response "${response.body}" (${response.correlation_id})`)
 
     res.send(response.body)
 })

@@ -28,7 +28,7 @@ const server = rhea.create_container()
 server.on("message", (event) => {
     const request = event.message;
 
-    console.log(`Received request "${request.body}" (ID ${request.message_id})`);
+    console.log(`Received request "${request.body}" (${request.message_id})`);
 
     const response = {
         to: request.reply_to,
@@ -38,7 +38,7 @@ server.on("message", (event) => {
 
     event.connection.send(response);
 
-    console.log(`Sent response "${response.body}" (ID ${response.correlation_id})`);
+    console.log(`Sent response "${response.body}" (${response.correlation_id})`);
 })
 
 server.listen({port: amqp_port})
