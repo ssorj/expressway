@@ -1,0 +1,7 @@
+HTTP client -> HTTP server: HTTP request: /api/submit {text: "abc"}
+
+HTTP server -> AMQP server: AMQP message: {text: "abc"}
+
+HTTP server <- AMQP server: AMQP message: {text: "ABC"}
+
+HTTP client <- HTTP server: HTTP response: {text: "ABC"}

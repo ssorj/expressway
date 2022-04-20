@@ -2,6 +2,8 @@
 
 An example program that combines async HTTP and AMQP operations
 
+<img src="images/sequence.svg" width="640"/>
+
 ## Installing dependencies
 
     npm install -g "express@>=5.0.0-beta.1"
