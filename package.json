@@ -1,0 +1,20 @@
+{
+    "name": "expressway",
+    "version": "1.0.0",
+    "description": "An example program that combines async HTTP and AMQP operations",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "express": "^5.0.0-beta.1",
+        "rhea": "^3.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ssorj/expressway.git"
+    },
+    "bin": {
+        "send": "./lib/send.js",
+        "receive": "./lib/receive.js",
+        "request": "./lib/request.js",
+        "respond": "./lib/respond.js"
+    }
+}
