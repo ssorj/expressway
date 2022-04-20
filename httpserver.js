@@ -58,6 +58,8 @@ amqp.on("message", (event) => {
 
 const http = express()
 
+let sequence = 0
+
 http.use(express.json())
 
 http.post("/api/submit", async (req, res) => {
@@ -66,17 +68,18 @@ http.post("/api/submit", async (req, res) => {
     }
 
     const request = {
+        message_id: sequence++,
         reply_to: receiver.source.address,
         body: req.body.text,
     }
 
     sender.send(request)
 
-    console.log(`Sent request "${request.body}"`)
+    console.log(`Sent request "${request.body}" (ID ${request.message_id})`)
 
     const [response] = await once(amqp, "x_response")
 
-    console.log(`Received response "${response.body}"`)
+    console.log(`Received response "${response.body}" (ID ${response.correlation_id})`)
 
     res.send(response.body)
 })
