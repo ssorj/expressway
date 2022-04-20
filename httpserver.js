@@ -58,9 +58,9 @@ amqp.on("message", (event) => {
 
 const http = express()
 
-let sequence = 0
-
 http.use(express.json())
+
+let sequence = 0
 
 http.post("/api/submit", async (req, res) => {
     if (!receiver) {
