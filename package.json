@@ -10,11 +10,5 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/ssorj/expressway.git"
-    },
-    "bin": {
-        "send": "./lib/send.js",
-        "receive": "./lib/receive.js",
-        "request": "./lib/request.js",
-        "respond": "./lib/respond.js"
     }
 }
